@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "17fb1bc1-c11e-42e8-82e1-7a33da4c36f7",
+		"name": "Dummy API Test Samples",
+		"description": "[https://dummyjson.com/docs/users#users-all](https://dummyjson.com/docs/users#users-all)\n\n[https://dummyjson.com/docs/users#users-all](https://dummyjson.com/docs/users#users-all)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "dummy_users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "607d435f-06e7-466e-82e2-9956a6da3122",
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"",
+							"//This to verify if they all have the IP property on their account",
+							"",
+							"//Checking the IP of a single user",
+							"pm.test(responseJson.users[0].firstName + \" \" + \"User has IP\", ()=> {",
+							"        pm.expect(responseJson.users[0]).to.have.property(\"ip\");",
+							"});",
+							"",
+							"//Checkinng the IP property and displaying their userId and firstName",
+							"responseJson.users.forEach(user =>{",
+							"        ",
+							"        pm.test(\"User ID\" + \" \" + user.id + \" : \"  + user.firstName + \" \" + \"has an IP property\"  ,()=> {",
+							"            pm.expect(user).to.have.property(\"ip\");",
+							"        });",
+							"",
+							"})",
+							"",
+							"//***********************************//",
+							"//***********************************//",
+							"",
+							"",
+							"pm.test(\"User has a property of 'firstName' and should be a 'string'\", function () {",
+							"     pm.expect(responseJson).to.be.an('object');",
+							"     pm.expect(responseJson.users).to.be.an('array');",
+							"     responseJson.users.forEach((user) => {",
+							"            pm.expect(user).to.have.property('firstName');",
+							"            pm.expect(user.firstName).to.be.a('string');",
+							"     });",
+							"});",
+							"",
+							"//Check the total count of users",
+							"pm.test(\"Assert total users\" + \" \" + responseJson.users.length, function() {",
+							"    pm.expect(true).to.be.true;",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "20012afd-d45c-4ed7-8478-0b1d2f484eb7",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://dummyjson.com/users",
+				"description": "https://dummyjson.com/users"
+			},
+			"response": []
+		}
+	]
+}
